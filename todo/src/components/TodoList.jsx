@@ -1,19 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { completedTodo } from '../actions/actions';
+import { completedTodo, deleteTodo } from '../actions/actions';
+import TodoItem from './TodoItem'
 
 
-export class TodoList extends React.Component {
+export  class TodoList extends React.Component {
     render() {
         return (
-            <div>
+            <ul>
                 {
                     this.props.todos.map(todo => (
-                        <p onClick={e => this.props.completedTodo(e.target.id)} id={todo.id} key={todo.id}>{todo.text}</p>
+                        <TodoItem 
+                            key={todo.id} 
+                            id={todo.id}
+                            completed={todo.completed}
+                            completedTodo={this.props.completedTodo}
+                            text={todo.text}
+                            deleteTodo={this.props.deleteTodo}
+                        />
                     ))
                 }
-            </div>
+            </ul>
         )
     }
 }
@@ -27,6 +35,7 @@ const mapStateToProps = state => {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
       completedTodo,
+      deleteTodo,
     }, dispatch);
   }
 
