@@ -1,4 +1,4 @@
-import { ADD_TODO, COMPLETED_TODO } from  '../actions/actions'
+import { ADD_TODO, COMPLETED_TODO, CLEAR_COMPLETED } from  '../actions/actions'
 
 
 export default function todosReducer(state = [], action) {
@@ -13,6 +13,8 @@ export default function todosReducer(state = [], action) {
                 }
                 return todo;
             });
+        case CLEAR_COMPLETED:
+            return state.filter(todo => todo.completed === false);
         default:
             return state;
 
